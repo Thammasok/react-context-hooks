@@ -1,37 +1,29 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import { BookContext } from '../../contexts/BookContext';
 
-class BookList extends Component {
-  // static contextType = ThemeContext;
-  render() { 
-    // const { isLightTheme, light, dark } = this.context;
-    // const theme = isLightTheme ? light : dark;
+// Hooks support function component it's not support Class base component
+const BookList = () => {
+  const { books } = useContext(BookContext);
+  const { isLightTheme, light, dark } = useContext(ThemeContext);
+  const theme = isLightTheme ? light : dark;
 
-    return (
-      <ThemeContext.Consumer>
-        { (context) => {
-          const { isLightTheme, light, dark } = context;
-          const theme = isLightTheme ? light : dark;
-
-          return (
-            <div
-              className="book-list" 
-              style={{
-                color: theme.syntax,
-                background: theme.bg
-              }}
-            >
-              <ul>
-                <li style={{ background: theme.ui }}>What if?</li>
-                <li style={{ background: theme.ui }}>Awareness</li>
-                <li style={{ background: theme.ui }}>Principle</li>
-              </ul>
-            </div>
+  return (
+    <div
+      className="book-list" 
+      style={{
+        color: theme.syntax,
+        background: theme.bg
+      }}
+    >
+      <ul>
+        {books.map((book) => (
+            <li key={book.id} style={{ background: theme.ui }}>{book.title}</li>
           )
-        }}
-      </ThemeContext.Consumer>
-     );
-  }
+        )}
+      </ul>
+    </div>
+  );
 }
  
 export default BookList;
