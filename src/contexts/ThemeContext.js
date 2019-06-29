@@ -25,12 +25,7 @@ class ThemeContextProvider extends Component {
 
   render() { 
     return (
-      <ThemeContext.Provider
-        value={{
-          ...this.state,
-          toggleTheme: this.toggleTheme
-        }}
-      >
+      <ThemeContext.Provider value={{ ...this.state, toggleTheme: this.toggleTheme }}>
         <h2>React Context</h2>
         { this.props.children }
       </ThemeContext.Provider>
